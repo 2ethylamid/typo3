@@ -1,0 +1,22 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+
+<f:layout name="Widget" />
+
+<f:section name="content">
+<div class="card my-4">
+	<h5 class="card-header"><f:translate key="headline.tags"/></h5>
+	<div class="card-body">
+	    <f:if condition="{tags}">
+		    <div class="tags">
+		    <f:for each="{tags}" as="tag" iteration="tagIterator">
+		        <blog:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />
+		        <f:if condition="{tagIterator.isLast}">
+		        	<f:then></f:then>
+		        	<f:else>, </f:else>
+		        </f:if>
+		    </f:for>
+		    </div>
+	    </f:if>
+	</div>
+</div>
+</f:section>

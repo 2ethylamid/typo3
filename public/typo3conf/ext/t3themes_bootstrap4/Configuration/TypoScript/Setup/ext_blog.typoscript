@@ -1,0 +1,8 @@
+plugin.tx_blog {
+    view {
+        templateRootPaths.100 = EXT:t3themes_bootstrap4/Resources/Private/Extensions/blog/Templates/
+        partialRootPaths.100 = EXT:t3themes_bootstrap4/Resources/Private/Extensions/blog/Partials/
+        layoutRootPaths.100 = EXT:t3themes_bootstrap4/Resources/Private/Extensions/blog/Layouts/
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:t3themes_bootstrap4/Resources/Private/Templates
+    }
+}

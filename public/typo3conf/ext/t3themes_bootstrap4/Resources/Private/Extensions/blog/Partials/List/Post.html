@@ -1,0 +1,44 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<section class="post">
+    <div class="card my-4">
+        <f:for each="{post.media}" as="media" iteration="mediaIterator">
+            <f:if condition="{mediaIterator.isFirst}">
+                <blog:link.post post="{post}">
+                    <img src="{f:uri.image(src:media.uid,treatIdAsReference:1)}" alt="" class="img-fluid" width="100%">
+                </blog:link.post>
+            </f:if>
+        </f:for>
+      <div class="card-body">
+        <h5 class="card-title">
+            <blog:link.post post="{post}" />
+        </h5>
+        <p class="card-text">
+            <p class="entry-date">
+                <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.crdate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.crdate)}</time>
+            </p>
+            <f:if condition="{post.abstract}">
+                <f:then>
+                    <p itemprop="description">{post.abstract}</p>
+                </f:then>
+                <f:else>
+                    <p itemprop="description">{post.description}</p>
+                </f:else>
+            </f:if>
+        </p>
+        <f:alias map="{commentCount: '<f:count subject=\'{post.activeComments}\' />'}">
+            <blog:link.post post="{post}" class="btn btn-primary"><i class="fa fa-book"></i> <f:translate key="button.continue_reading" default="Continue Reading" /></blog:link.post>
+            <span class="sep">·</span>
+            <meta itemprop="commentCount" content="{commentCount}" />
+            <span class="comments-link">
+            <blog:link.post post="{post}" section="comments" class="btn btn-dark">
+            <i class="fa fa-comment"></i>
+            <f:if condition="{commentCount} == 1">
+                <f:then><f:translate key="message.comment" arguments="{0: commentCount}" /></f:then>
+                <f:else><f:translate key="message.comments" arguments="{0: commentCount}" /></f:else>
+            </f:if>
+            </blog:link.post>
+            </span>
+        </f:alias>
+      </div>
+    </div>
+</section>

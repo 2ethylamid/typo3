@@ -1,0 +1,13 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<f:layout name="Widget" />
+
+<f:section name="content">
+<div class="card my-4">
+    <h5 class="card-header"><f:translate key="headline.rssfeed"/></h5>
+    <div class="card-body">
+		<ul class="feeds divided" style="margin-bottom:0;">
+		    <li><f:link.action pageUid="{settings.blogUid}" pageType="200" format="rss" action="listRecentPosts" controller="Post">Recent posts</f:link.action></li>
+		</ul>
+    </div>
+</div>
+</f:section>

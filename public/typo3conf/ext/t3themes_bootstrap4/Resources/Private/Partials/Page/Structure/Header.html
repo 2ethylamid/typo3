@@ -1,0 +1,107 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+	<f:render section="OverrideStyles" arguments="{t3themesConf:t3themesConf,data:data}" />
+
+	<f:switch expression="{t3themesConf.headerFullWidth}">
+		<f:case value="onlybg">
+		<!-- Background > Container -->
+			<div class="headerC{data.uid}" style="{f:if(condition:'{t3themesConf.headerBgColor}',then:'background-color:{t3themesConf.headerBgColor};',else:'')}">
+				<div class="container">
+					<f:render section="LayoutInner" arguments="{_all}" />
+				</div>
+			</div>
+		</f:case>
+		<f:case value="container">
+		<!-- Background + Container -->
+			<div class="headerC{data.uid}">
+				<div style="{f:if(condition:'{t3themesConf.headerBgColor}',then:'background-color:{t3themesConf.headerBgColor};',else:'')}" class="container">
+					<f:render section="LayoutInner" arguments="{_all}" />
+				</div>
+			</div>
+		</f:case>
+		<f:defaultCase>
+		<!-- Background (No Container) -->
+			<div class="headerC{data.uid}" style="{f:if(condition:'{t3themesConf.headerBgColor}',then:'background-color:{t3themesConf.headerBgColor};',else:'')}">
+				<f:render section="LayoutInner" arguments="{_all}" />
+			</div>
+		</f:defaultCase>
+	</f:switch>
+
+	<!-- SECTIONS START -->
+		<f:section name="LayoutInner">
+
+			<!-- Header -->
+	        <f:if condition="{t3themesConf.headerLogo} != 'hide'">
+	        	<f:switch expression="{t3themesConf.headerStyle}">
+	        		<f:case value="2">
+	        			<f:render section="Variant2" arguments="{_all}" />
+	        		</f:case>
+	        		<f:defaultCase>
+	        			<f:render section="Variant1" arguments="{_all}" />
+	        		</f:defaultCase>
+	        	</f:switch>
+	        </f:if>
+
+		</f:section>
+
+		<f:section name="Variant1">
+
+			<f:render section="LogoImage" arguments="{_all}" />
+			<f:render section="HeaderContent" arguments="{_all}" />
+
+		</f:section>
+
+		<f:section name="Variant2">
+
+			<div>
+		    	<div class="pull-left">
+					<f:render section="LogoImage" arguments="{_all}" />
+		    	</div>
+		    	<div class="pull-left">
+					<f:render section="LogoText" arguments="{_all}" />
+		    	</div>
+		    	<div class="pull-left">
+		    		<f:render section="HeaderContent" arguments="{_all}" />
+		    	</div>
+		    	<div class="clearfix"></div>
+			</div>
+
+		</f:section>
+
+		<f:section name="LogoImage">
+			<f:if condition="{t3themesConf.headerLogoUrl}">
+				<a href="/"><img style="background:{f:if(condition:t3themesConf.headerLogoBgColor,then:t3themesConf.headerLogoBgColor,else:'transparent')};padding:12px;margin:12px 0 0 0;padding-top:0;" src="{t3themesConf.headerLogoUrl}" alt="{t3themesConf.headerLogoUrl}" /></a>
+				<!-- f.media maybe? -->
+			</f:if>
+
+		</f:section>
+
+		<f:section name="LogoText"><f:spaceless>
+
+			<f:if condition="{t3themesConf.headerLogoText}">
+				<f:if condition="{t3themesConf.headerLogoText} != '_'">
+					{t3themesConf.headerLogoText->f:format.raw()}
+				</f:if>
+			</f:if>
+
+		</f:spaceless></f:section>
+
+		<f:section name="HeaderContent">
+
+			<!-- HEADER CONTENT -->
+				<f:switch expression="{t3themesConf.headerDisplay}">
+					<f:case value="hidenav"><!-- Nothing --></f:case>
+					<f:defaultCase>
+						<!-- SHOW DEFAULT THEME NAVIGATION -->
+						<f:render partial="Navigation/Main" arguments="{mainnavigation:mainnavigation,logoText:'{f:render(section:\'LogoText\',arguments:_all)}'}" />
+					</f:defaultCase>
+				</f:switch>
+
+		</f:section>
+
+		<f:section name="OverrideStyles">
+			<f:if condition="{t3themesConf.headerTextColor}"><style type="text/css">.headerC{data.uid},.headerC{data.uid} a,.headerC{data.uid} p{color:{t3themesConf.headerTextColor};}</style></f:if>
+		</f:section>
+	<!-- SECTIONS END -->
+
+</html>

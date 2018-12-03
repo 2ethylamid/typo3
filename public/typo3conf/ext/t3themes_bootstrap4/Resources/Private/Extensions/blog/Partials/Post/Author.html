@@ -1,0 +1,30 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<section class="author-box">
+	<header>
+		<h5>
+			<img width="52px" class="img-circle" src="{author.avatar}">
+			&nbsp;
+			<f:if condition="{author.profile}">
+				<f:then><a rel="author" href="{author.profile}">{author.name}</a></f:then>
+				<f:else>{author.name}</f:else>
+			</f:if>
+		</h5>
+
+		<h5><f:if condition="{author.title}"><span class="author-title text-secondary">{author.title}, {author.location}</span></f:if></h5>
+
+		<div class="author-box-content">{author.bio}</div>
+
+		<p><blog:link.author author="{author}"><f:translate key="author.more.posts" /></blog:link.author></p>
+
+		<p>
+
+		<small class="author-social-links small">
+			<f:if condition="{author.website}"><a href="{author.website}" class="author-social-link website small" target="_blank"><i class="fa fa-2x fa-globe"></i></a></f:if>
+			<f:if condition="{author.twitter}"><a href="https://twitter.com/{author.twitter}" class="author-social-link twitter small" target="_blank"><i class="fa fa-2x fa-twitter"></i></a></f:if>
+			<f:if condition="{author.googleplus}"><a href="{author.googleplus}" class="author-social-link gplus small" target="_blank"><i class="fa fa-2x fa-google-plus"></i></a></f:if>
+			<f:if condition="{author.linkedin}"><a href="{author.linkedin}" class="author-social-link linkedin small" target="_blank"><i class="fa fa-2x fa-linkedin"></i></a></f:if>
+			<f:if condition="{author.xing}"><a href="{author.xing}" class="author-social-link xing small" target="_blank"><i class="fa fa-2x fa-xing"></i></a></f:if>
+		</small>
+		</p>
+	</header>
+</section>
